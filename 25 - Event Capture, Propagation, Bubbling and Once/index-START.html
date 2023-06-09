@@ -43,6 +43,27 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+
+  function logText(e) {
+    /*
+    When clicking on an element, since it is wrapped in something (body, html, etc.), we are also clicking on those as well!
+
+    This is called "Bubbling"
+
+    "Capture": when targeting an element (i.e., click listener), it will ripple down, "capturing" all children
+
+    In JavaScript, when an event is to be triggered, it first "captures" all the way to the most nested element, and then triggers the event, bubbling upwards
+    */
+
+    console.log(this.classList.value);
+    e.stopPropagation();
+  }
+
+  divs.forEach( (div) => div.addEventListener('click', logText, {
+    capture: true, // by setting this, events will trigger on the capture down, NOW the bubble up!
+    once: true // event triggers once before listener unbinds itself from the element
+  }) );
 
 </script>
 </body>
